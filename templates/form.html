@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+
+{% block page%}
+    <div class="container">
+        <h1>Thank You for registration</h1>
+        <small>Please confirm your form</small>
+        <br/><br/>
+        {{ first_name }} {{ last_name }} {{ email }}
+
+{% endblock %}

@@ -1,6 +1,46 @@
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///registerform.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+db = SQLAlchemy(app)
+
+class RegisterForm(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    address = db.Column(db.String(30))
+    phone = db.Column(db.String(20))
+    web_site = db.Column(db.String(20))
+    user_name = db.Column(db.String(20))
+
+    def __repr__(self):
+        return f"RegisterForm('{self.name}', '{self.address}', '{self.phone}', '{self.web_site}','{self.user_name}')"
+
+
+@app.route('/secondreg', methods=['GET', 'POST'])
+def secondreg():
+    return render_template('secondreg.html')
+
+@app.route('/registerform', methods=['GET', 'POST'])
+def registerform():
+    if request.method == 'POST':
+        name = request.form['name']
+        address = request.form['address']
+        phone = request.form['phone']
+        web_site = request.form['web_site']
+        user_name = request.form['user_name']
+        user = RegisterForm(name=name, address=address, phone=phone, web_site=web_site, user_name=user_name) 
+        db.session.add(user)
+        db.session.commit()
+        return 'You are successfully registered!'
+
+
+@app.route('/users')
+def users():
+    users = RegisterForm.query.all() #bax indi test elemek ucun burdaki log var ordada test ede bilersen
+    print(users) #yazaraq bunu sahesinde logda cixdi duzdur?
+    return render_template('users.html', users=users)
 
 @app.route('/index')
 def index():
@@ -30,22 +70,6 @@ def form():
     title="Thank you!"
     return render_template('form.html', title=title, first_name=first_name, last_name=last_name, email=email)
 
-@app.route('/admin', methods=["POST"])
-def admin():
-    username = request.form.get("username")
-    email = request.form.get("email")
-    address = request.form.get("address")
-    phone = request.form.get("phone")
-    image = request.form.get("image")
-    web_site = request.form.get("web_site")
-    title = "Welcome your page"
-    return render_template('admin.html', title=tile, username=username, email=email, address=address, phone=phone, imag=image, web_site=web_site)
-
-
-
-@app.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
-    return render_template("public/upload_image.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

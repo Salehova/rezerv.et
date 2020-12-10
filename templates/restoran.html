@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <title>Restoran {{restoran.user_name}}</title>
+    <meta charset="utf-8" />
+</head>
+
+<body> 
+    <h1>{{ restoran.user_name }}  - Profile</h1>
+    <a href='{{ restoran.id }}'>Sizin website</a>
+    <div style="text-align:center;">
+      <h2>Reservation Here!</h2>
+  
+      <form class="" action="admin" method="post">
+          <table style="display:inline-table;">
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="name" name='name'>
+          <input type="text" class="form-control" placeholder="phone", name='phone'>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="hour", name='hour'>
+          <input type="text" class="form-control" placeholder="email", name='email'>
+        </div>
+      </div>
+      <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -3,9 +3,40 @@
 
 {% block page%}
     <div class="container">
-        <h1>Thank You for registration</h1>
-        <small>Please confirm your form</small>
+        <h1>Create your registration form</h1>
         <br/><br/>
-        {{ first_name }} {{ last_name }} {{ email }}
+        <div style="text-align:center;">
+            <h2>Register Here!</h2>
+        
+            <form class="" action="register" method="post">
+                <table style="display:inline-table;">
+                    
+                    <tr> 
+                        <td>Name</td>
+                        <td><input type="text" name="namez" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td> 
+                        <td><input type="text" name="address" value=""></td>
+                    </tr>            
+                    <tr>
+                        <td>Phone</td>
+                        <td><input type="text" name="phone" value=""></td>
+                    </tr>            
+                    <tr>
+                        <td>Web site</td>
+                        <td><input type="text" name="web_site" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>User name</td>
+                        <td><input type="text" name="user_name" value=""></td> 
+                    </tr>
+        
+                </table>
+                <br>
+                    <input type="submit" name="" value="submit">
+                </br>
+            </form>
+        </div>
 
 {% endblock %}
